@@ -16,6 +16,8 @@ Dự án này tập trung vào việc khảo sát các kỹ thuật prompting hi
 pip install numpy pandas
 pip install matplotlib seaborn
 pip install -U scikit-learn
+pip install python-dotenv
+pip install openai
 ```
 
 ## 3. Hướng dẫn thực hiện thực nghiệm
