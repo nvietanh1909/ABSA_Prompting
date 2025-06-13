@@ -19,6 +19,9 @@ pip install -U scikit-learn
 pip install python-dotenv
 pip install openai
 ```
+* Tạo file ```.env``` -> copy các API_KEY vào
+* Tạo các folders: ```data```, ```results```
+* Tải các tập dữ liệu (mục 1) vào folder ```data```
 
 ## 3. Hướng dẫn thực hiện thực nghiệm
 ### 3.1. Các thực nghiệm ML
