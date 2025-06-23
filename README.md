@@ -51,15 +51,6 @@ pip install sentence-transformers
 - **Kết quả**:
   - **F1_ad (Aspect Detection)**: 0.9307
   - **F1_sc (Sentiment Classification)**: 0.8845
-- **Chi tiết từng khía cạnh**:
-  - stayingpower: 0.7485
-  - texture: 0.7848
-  - smell: 0.8423
-  - price: 0.9844
-  - others: 1.0000
-  - colour: 0.8507
-  - shipping: 0.9061
-  - packing: 0.9593
 
 ### 3.3. Các thực nghiệm Deep Learning
 **File**: `ViABSA_BP_DL.ipynb`
@@ -97,19 +88,32 @@ pip install sentence-transformers
   - **F1_ad**: 0.8700
   - **F1_sc**: 0.7277
 
-#### 3.4.2. Few-shot Learning
-**File**: `ViABSA_BP_Few-shot.ipynb`
+#### 3.4.2. Few-shot Learning (Clustering-based)
+**File**: `ViABSA_BP_Few-shot-Clustering.ipynb`
 
 - **Mô hình**: GPT-4o
 - **Phương pháp**: 
-  - K-Means clustering để chọn examples đa dạng (70%)
-  - Random sampling cho examples khó (30%)
-  - Sentence embeddings với all-MiniLM-L6-v2
-- **Kết quả**:
-  - **F1_ad**: 0.9126
-  - **F1_sc**: 0.7729
+  - Sử dụng Sentence Embedding (all-MiniLM-L6-v2) để biểu diễn các câu.
+  - K-Means clustering để chọn ra các example đa dạng nhất (70% số lượng example).
+  - Kết hợp chọn ngẫu nhiên các ví dụ "khó" (30%) từ phần còn lại.
+  - Prompt cố định cho mọi input.
+- **Kết quả**: (Cập nhật theo thực nghiệm của bạn)
+  - **F1_ad**: ...
+  - **F1_sc**: ...
 
-#### 3.4.3. Chain-of-Thought (CoT)
+#### 3.4.3. Few-shot Learning (Similarity-based, Retrieval-based Dynamic Prompting)
+**File**: `ViABSA_BP_Few-shot-Similarity.ipynb`
+
+- **Mô hình**: GPT-4o
+- **Phương pháp**: 
+  - Sử dụng Sentence Embedding (all-MiniLM-L6-v2) để tính độ tương đồng semantic giữa input và các example.
+  - Với mỗi input, chọn top-k example gần nhất (retrieval-based, dynamic few-shot).
+  - Prompt được xây dựng động cho từng input.
+- **Kết quả**:
+  - **F1_ad**: 0.8883
+  - **F1_sc**: 0.7633
+
+#### 3.4.4. Chain-of-Thought (CoT)
 **File**: `ViABSA_BP_CoT.ipynb`
 
 - **Mô hình**: GPT-4o
@@ -129,13 +133,14 @@ pip install sentence-transformers
 | **BiGRU** | 0.8032 | 0.8441 |
 | **BiLSTM + Conv1D** | 0.9271 | 0.6906 |
 | **Zero-shot** | 0.8700 | 0.7277 |
-| **Few-shot** | 0.9126 | 0.7729 |
+| **Few-shot (Clustering)** | 0.9126 | 0.7729 |
+| **Few-shot (Similarity)** | 0.8883 | 0.7633 |
 | **Chain-of-Thought** | 0.9060 | 0.7578 |
 
 ## 5. Kết luận
 
 - **Machine Learning** cho kết quả tốt nhất về F1_sc (0.8845)
-- **Few-shot Learning** cho kết quả tốt nhất về F1_ad (0.9126) trong các phương pháp prompting
+- **Few-shot Learning** (Clustering hoặc Similarity) cho kết quả tốt về F1_ad trong các phương pháp prompting
 - **Chain-of-Thought** không cải thiện đáng kể so với Few-shot thông thường
 - Các phương pháp prompting cho kết quả khá tốt mà không cần huấn luyện mô hình
 
@@ -143,17 +148,18 @@ pip install sentence-transformers
 
 ```
 ABSA_Prompting/
-├── data/                    # Chứa tập dữ liệu
-├── results/                 # Kết quả thực nghiệm
-├── mint/                    # Thư viện hỗ trợ
-├── ViABSA_BP_EDA.ipynb      # Phân tích dữ liệu
-├── ViABSA_BP_ML.ipynb       # Thực nghiệm Machine Learning
-├── ViABSA_BP_DL.ipynb       # Thực nghiệm Deep Learning
-├── ViABSA_BP_Zero-shot.ipynb # Thực nghiệm Zero-shot
-├── ViABSA_BP_Few-shot.ipynb  # Thực nghiệm Few-shot
-├── ViABSA_BP_CoT.ipynb       # Thực nghiệm Chain-of-Thought
-├── main.py                   # File chính
-├── setup.py                  # Cài đặt package
-└── README.md                 # Hướng dẫn sử dụng
+├── data/                        # Chứa tập dữ liệu
+├── results/                     # Kết quả thực nghiệm
+├── mint/                        # Thư viện hỗ trợ
+├── ViABSA_BP_EDA.ipynb          # Phân tích dữ liệu
+├── ViABSA_BP_ML.ipynb           # Thực nghiệm Machine Learning
+├── ViABSA_BP_DL.ipynb           # Thực nghiệm Deep Learning
+├── ViABSA_BP_Zero-shot.ipynb    # Thực nghiệm Zero-shot
+├── ViABSA_BP_Few-shot-Clustering.ipynb   # Few-shot clustering-based
+├── ViABSA_BP_Few-shot-Similarity.ipynb   # Few-shot similarity-based (retrieval)
+├── ViABSA_BP_CoT.ipynb          # Thực nghiệm Chain-of-Thought
+├── main.py                      # File chính
+├── setup.py                     # Cài đặt package
+└── README.md                    # Hướng dẫn sử dụng
 ```
 
