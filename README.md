@@ -97,9 +97,9 @@ pip install sentence-transformers
   - K-Means clustering để chọn ra các example đa dạng nhất (70% số lượng example).
   - Kết hợp chọn ngẫu nhiên các ví dụ "khó" (30%) từ phần còn lại.
   - Prompt cố định cho mọi input.
-- **Kết quả**: (Cập nhật theo thực nghiệm của bạn)
-  - **F1_ad**: ...
-  - **F1_sc**: ...
+- **Kết quả**:
+  - **F1_ad**: 0.9126
+  - **F1_sc**: 0.7729
 
 #### 3.4.3. Few-shot Learning (Similarity-based, Retrieval-based Dynamic Prompting)
 **File**: `ViABSA_BP_Few-shot-Similarity.ipynb`
