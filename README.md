@@ -21,6 +21,7 @@ pip install openai
 pip install tensorflow
 pip install tf-keras
 pip install sentence-transformers
+pip install google-generativeai
 
 ```
 * Tạo file ```.env``` -> copy các API_KEY vào
